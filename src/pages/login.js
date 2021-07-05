@@ -3,30 +3,18 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import AppIcon from '../images/twitter.svg';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+
 //MUI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const styles = {
-    form: {
-        textAlign: 'center',
-    },
-    image: {
-        width: '50%',
-        margin: '20px auto 20px auto'
-    },
-    pageTitle: {
-        margin: '10px auto 10px auto'
-    },
-    textField: {
-        margin: '10px auto 10px auto'
-    },
-    button: {
-        marginTop: 20
-    }
-}
+const styles = (theme) => ({
+    ...theme.spreadThis
+})
 
 
 
@@ -110,10 +98,25 @@ class Login extends Component {
                         onChange={this.handleChange}
                         fullWidth
                         />
-                        <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                        {errors.general && (
+                            <Typography variant="body2" className={classes.customError}>
+                                {errors.general}
+                            </Typography>
+                        )}
+                        <Button 
+                        type="submit" 
+                        variant="contained" 
+                        color="primary" 
+                        className={classes.button}
+                        disabled={loading}>
                             Login
+                            {loading && (
+                                <CircularProgress size={30} className={classes.progress}/>
+                            )}
                         </Button>
+                        
                     </form>
+                    <small>Don't have an account yet? Sign up <Link to="/signup">Here</Link></small>
                 </Grid>
                 <Grid item sm/>
             </Grid>
