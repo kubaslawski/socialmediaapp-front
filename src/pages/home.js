@@ -4,6 +4,7 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 //COMPONENTS
 import Tweet from '../components/Tweet';
+import Profile from '../components/Profile';
 
 class Home extends Component {
 
@@ -32,7 +33,7 @@ class Home extends Component {
                     {recentTweetsMarkup}
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <p>Profile...</p>
+                    <Profile/>
                 </Grid>
             </Grid>
         )
