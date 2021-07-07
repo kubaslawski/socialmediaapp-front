@@ -52,7 +52,7 @@ export default function(state=initialState, action){
         case UNLIKE_TWEET:
             return {
                 ...state,
-                likes: state.likes.filter((like) => like.tweetId === action.payload.tweetId)
+                likes: state.likes.filter((like) => like.tweetId !== action.payload.tweetId)
             }
         default: 
         return state;

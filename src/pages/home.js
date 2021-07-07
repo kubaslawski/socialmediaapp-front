@@ -16,7 +16,6 @@ class Home extends Component {
     }
     render() {
 
-        console.log(this.props)
         
         const {tweets, loading} = this.props.data;
 
