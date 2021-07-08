@@ -43,7 +43,10 @@ export const unlikeTweet = tweetId => dispatch => {
 export const deleteTweet = tweetId => dispatch => {
     axios.delete(`/tweet/${tweetId}`)
         .then(() => {
-            dispatch({type: DELETE_TWEET, payload: tweetId})
+            dispatch({
+                type: DELETE_TWEET,
+                payload: tweetId
+            })
         })
         .catch(err => console.log(err));
 }

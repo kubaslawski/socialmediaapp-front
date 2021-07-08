@@ -16,9 +16,14 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import {connect} from 'react-redux';
 import {deleteTweet} from '../redux/actions/dataActions';
 import { ThemeProvider } from '@material-ui/core';
+import { ArrowBackIosOutlined } from '@material-ui/icons';
 
 const styles = {
-
+    deleteButton: {
+        position: 'absolute',
+        left: '90%',
+        top: '10%'
+    }
 }
 
 class DeleteTweet extends Component {
