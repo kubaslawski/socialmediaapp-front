@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 //MUI
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
@@ -19,7 +20,7 @@ import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 //REDUX
 import {connect} from 'react-redux';
-import {getTweet} from '../../redux/actions/dataActions';
+import {getTweet, clearErrors} from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -56,6 +57,7 @@ class TweetDialog extends Component {
     }
     handleClose = () => {
         this.setState({open: false});
+        this.props.clearErrors();
     }
     
     render(){
@@ -108,6 +110,7 @@ class TweetDialog extends Component {
                         <span>{commentCount}</span>
                     </Grid>
                     <hr className={classes.visibleSeparator}/>
+                    <CommentForm tweetId={tweetId}/>
                     <Comments comments={comments}/>
                 </Grid>
             )
@@ -132,6 +135,7 @@ class TweetDialog extends Component {
 }
 
 TweetDialog.propTypes = {
+    clearErrors: PropTypes.func.isRequired,
     getTweet: PropTypes.func.isRequired,
     tweetId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
@@ -145,7 +149,8 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-    getTweet
+    getTweet,
+    clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(TweetDialog));

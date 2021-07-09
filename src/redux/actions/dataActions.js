@@ -1,4 +1,17 @@
-import {SET_TWEETS, SET_TWEET, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, DELETE_TWEET, POST_TWEET, CLEAR_ERRORS, LOADING_UI, SET_ERRORS, STOP_LOADING_UI} from '../types';
+import {
+    SET_TWEETS, 
+    SET_TWEET, 
+    LOADING_DATA, 
+    LIKE_TWEET, 
+    UNLIKE_TWEET, 
+    DELETE_TWEET, 
+    POST_TWEET, 
+    CLEAR_ERRORS, 
+    LOADING_UI, 
+    SET_ERRORS, 
+    STOP_LOADING_UI,
+    SUBMIT_COMMENT,    
+} from '../types';
 import axios from 'axios';
 
 export const getTweets = () => dispatch => {
@@ -22,7 +35,6 @@ export const getTweet = tweetId => dispatch => {
     dispatch({type: LOADING_UI});
     axios.get(`/tweet/${tweetId}`)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: SET_TWEET,
                 payload: res.data
@@ -34,6 +46,26 @@ export const getTweet = tweetId => dispatch => {
         .catch(err => {
             console.log(err)
         });
+}
+
+export const postTweet = newTweet => dispatch => {
+    dispatch({type: LOADING_UI});
+    console.log(newTweet)
+    axios.post('https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/tweet', newTweet)
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: POST_TWEET,
+                payload: res.data.resTweet
+            });
+            dispatch({type: CLEAR_ERRORS});
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
 }
 
 export const likeTweet = tweetId => dispatch => {
@@ -69,17 +101,14 @@ export const deleteTweet = tweetId => dispatch => {
         .catch(err => console.log(err));
 }
 
-export const postTweet = newTweet => dispatch => {
-    dispatch({type: LOADING_UI});
-    console.log(newTweet)
-    axios.post('https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/tweet', newTweet)
+export const submitComment = (tweetId, commentData) => dispatch => {
+    axios.post(`https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/tweet/${tweetId}/comment`, commentData)
         .then(res => {
-            console.log(res)
             dispatch({
-                type: POST_TWEET,
-                payload: res.data.resTweet
+                type: SUBMIT_COMMENT,
+                payload: res.data
             });
-            dispatch({type: CLEAR_ERRORS});
+            dispatch(clearErrors())
         })
         .catch(err => {
             dispatch({
@@ -88,6 +117,7 @@ export const postTweet = newTweet => dispatch => {
             })
         })
 }
+
 
 export const clearErrors = () => dispatch => {
     dispatch({type: CLEAR_ERRORS});
