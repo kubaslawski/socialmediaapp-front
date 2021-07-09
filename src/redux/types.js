@@ -11,6 +11,7 @@ export const LOADING_DATA = 'LOADING_DATA';
 
 export const SET_TWEETS = 'SET_TWEETS';
 export const SET_TWEET = 'SET_TWEET';
+export const POST_TWEET = 'POST_TWEET';
 export const LIKE_TWEET = 'LIKE_TWEET';
 export const UNLIKE_TWEET = 'UNLIKE_TWEET';
 export const DELETE_TWEET = 'DELETE_TWEET';

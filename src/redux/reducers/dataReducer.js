@@ -1,4 +1,4 @@
-import {SET_TWEETS, SET_TWEET, LIKE_TWEET, UNLIKE_TWEET, LOADING_DATA, DELETE_TWEET} from '../types';
+import {SET_TWEETS, SET_TWEET, LIKE_TWEET, UNLIKE_TWEET, LOADING_DATA, DELETE_TWEET, POST_TWEET} from '../types';
 
 const initialState = {
     tweets: [],
@@ -6,6 +6,7 @@ const initialState = {
     loading: false
 };
 
+let index;
 export default function(state=initialState, action){
     switch(action.type){
         case LOADING_DATA:
@@ -21,7 +22,7 @@ export default function(state=initialState, action){
             }
         case LIKE_TWEET: 
         case UNLIKE_TWEET:
-            let index = state.tweets.findIndex((tweet) => tweet.tweetId === action.payload.tweetId);
+            index = state.tweets.findIndex((tweet) => tweet.tweetId === action.payload.tweetId);
             state.tweets[index] = action.payload;
             return {
                 ...state
@@ -31,6 +32,15 @@ export default function(state=initialState, action){
             state.tweets.splice(index, 1);
             return {
                 ...state
+            }
+        case POST_TWEET:
+            return {
+                ...state,
+                tweets: [
+                    action.payload, 
+                    ...state.tweets
+                ]
+                
             }
         default:
             return state

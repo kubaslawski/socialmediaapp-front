@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {Link} from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -44,7 +44,7 @@ class DeleteTweet extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <>
+            <Fragment>
             <MyButton tip="Delete Tweet"
                 onClick={this.handleOpen}
                 btnClassName={classes.deleteButton}
@@ -69,7 +69,7 @@ class DeleteTweet extends Component {
                     </Button>
                 </DialogActions>
             </Dialog>
-            </>
+            </Fragment>
         )
     }
 }

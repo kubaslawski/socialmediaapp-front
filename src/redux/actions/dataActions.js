@@ -1,4 +1,4 @@
-import {SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, DELETE_TWEET} from '../types';
+import {SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, DELETE_TWEET, POST_TWEET, CLEAR_ERRORS, LOADING_UI, SET_ERRORS} from '../types';
 import axios from 'axios';
 
 export const getTweets = () => dispatch => {
@@ -41,7 +41,7 @@ export const unlikeTweet = tweetId => dispatch => {
 }
 
 export const deleteTweet = tweetId => dispatch => {
-    axios.delete(`/tweet/${tweetId}`)
+    axios.delete(`https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/tweet/${tweetId}/delete`)
         .then(() => {
             dispatch({
                 type: DELETE_TWEET,
@@ -49,4 +49,24 @@ export const deleteTweet = tweetId => dispatch => {
             })
         })
         .catch(err => console.log(err));
+}
+
+export const postTweet = newTweet => dispatch => {
+    dispatch({type: LOADING_UI});
+    console.log(newTweet)
+    axios.post('https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/tweet', newTweet)
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: POST_TWEET,
+                payload: res.data.resTweet
+            });
+            dispatch({type: CLEAR_ERRORS});
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
 }

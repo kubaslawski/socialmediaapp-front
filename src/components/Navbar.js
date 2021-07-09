@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MyButton from '../util/MyButton';
+import PostTweet from './PostTweet';
 //REDUX 
 import {connect} from 'react-redux';
 //MUI
@@ -15,33 +16,29 @@ import Notifications from '@material-ui/icons/Notifications';
 
 class Navbar extends Component {
     render() {
-
-        const {authenticated} = this.props
+        const {authenticated} = this.props;
 
         return (
             <AppBar>
                 <Toolbar className="nav-container">
                     {authenticated ? (
-                        <>
-                            <MyButton tip="Create a Tweet">
-                                <AddIcon color="secondary"/>
-                            </MyButton>
+                        <Fragment>
+                            <PostTweet/>
                             <Link to="/">
                             <MyButton tip="Home">
                                 <HomeIcon color="secondary"/>
                             </MyButton>
+                            </Link>
                             <MyButton tip="Notifications">
                                 <Notifications color="secondary"/>
                             </MyButton>
-                    
-                            </Link>
-                        </>
+                        </Fragment>
                     ) : (
-                        <>
+                        <Fragment>
                         <Button color="inherit" component={Link} to="/login" >Login</Button>
                         <Button color="inherit" component={Link} to="/" >Home</Button>
                         <Button color="inherit" component={Link} to="/signup" >SignUp</Button>
-                        </>
+                        </Fragment>
                     )} 
                 </Toolbar>
             </AppBar>

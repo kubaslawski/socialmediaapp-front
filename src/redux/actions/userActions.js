@@ -72,7 +72,7 @@ export const getUserData = () => dispatch => {
 export const uploadImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios
-      .post(`/user/image`, formData)
+      .post(`https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/user/image`, formData)
       .then(() => {
         dispatch(getUserData());
       })
@@ -94,3 +94,32 @@ export const editUserDetails = userDetails => dispatch => {
         })
         .catch(err => console.log(err));
 }
+
+// export const deleteTweet = tweetId => dispatch => {
+//     axios.delete(`/tweet/${tweetId}`)
+//         .then(() => {
+//             dispatch({
+//                 type: DELETE_TWEET,
+//                 payload: tweetId
+//             })
+//         })
+//         .catch(err => console.log(err));
+// }
+
+// export const postTweet = newTweet => dispatch => {
+//     dispatch({type: LOADING_UI});
+//     axios.post('/tweet', newTweet)
+//         .then(res => {
+//             dispatch({
+//                 type: POST_TWEET,
+//                 payload: res.data
+//             });
+//             dispatch({type: CLEAR_ERRORS});
+//         })
+//         .catch(err => {
+//             dispatch({
+//                 type: SET_ERRORS,
+//                 payload: err.response.data
+//             })
+//         })
+// }
