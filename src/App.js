@@ -5,6 +5,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 //Redux
 import {Provider} from 'react-redux';
 import store from './redux/store';
@@ -17,9 +18,7 @@ import AuthRoute from './util/AuthRoute';
 import Home from './pages/home';
 import Login from './pages/login';
 import SignUp from './pages/signup';
-import axios from 'axios';
-
-
+import User from './pages/user';
 
 const theme = createMuiTheme(themeFile);
 
@@ -56,6 +55,7 @@ class App extends Component {
             exact path="/signup" 
             component={SignUp} 
             />
+            <Route exact path="/users/:handle" component={User}/>
           </Switch> 
           </div>
         </Router>
