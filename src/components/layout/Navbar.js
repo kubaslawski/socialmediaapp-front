@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MyButton from '../util/MyButton';
-import PostTweet from './PostTweet';
+import MyButton from '../../util/MyButton';
+import PostTweet from '../tweet/PostTweet';
 //REDUX 
 import {connect} from 'react-redux';
 //MUI
@@ -10,7 +10,6 @@ import AppBar from '@material-ui/core/Appbar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 //ICONS 
-import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import Notifications from '@material-ui/icons/Notifications';
 

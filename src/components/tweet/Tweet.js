@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
 //COMPONENTS
-import MyButton from '../util/MyButton';
-import DeleteTweet from '../components/DeleteTweet';
+import MyButton from '../../util/MyButton';
+import DeleteTweet from './DeleteTweet';
 import TweetDialog from './TweetDialog';
 import LikeButton from './LikeButton';
 //MUI
@@ -16,12 +16,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 //ICONS
 import ChatIcon from '@material-ui/icons/Chat';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 //REDUX
 import { connect } from 'react-redux';
-import {likeTweet} from '../redux/actions/dataActions';
-import {unlikeTweet} from '../redux/actions/dataActions';
+
 
 const styles = {
     card: {
