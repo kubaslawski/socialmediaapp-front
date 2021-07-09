@@ -29,6 +29,9 @@ export default function(state=initialState, action){
         case UNLIKE_TWEET:
             index = state.tweets.findIndex((tweet) => tweet.tweetId === action.payload.tweetId);
             state.tweets[index] = action.payload;
+            if(state.tweet.tweetId === action.payload.tweetId){
+                state.tweet = action.payload;
+            }
             return {
                 ...state
             }

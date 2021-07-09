@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import {Link} from 'react-router-dom';
 //COMPONENTS
 import MyButton from '../util/MyButton';
+import LikeButton from './LikeButton';
 //MUI
 import Button from '@material-ui/core/Button';
 import MuiLink from '@material-ui/core/Link';
@@ -22,6 +23,7 @@ import Grid from '@material-ui/core/Grid';
 //ICONS
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
+import ChatIcon from '@material-ui/icons/Chat';
 //REDUX
 import {connect} from 'react-redux';
 import {getTweet} from '../redux/actions/dataActions';
@@ -45,6 +47,15 @@ const styles = theme => ({
     closeButton: {
         position: 'absolute',
         left: '90%'
+    },
+    // expandButton: {
+    //     position: 'absoulute',
+    //     left: '90%'
+    // },
+    spinnerDiv: {
+        textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 50
     }
 })
 class TweetDialog extends Component {
@@ -72,7 +83,10 @@ class TweetDialog extends Component {
             UI: {loading}} = this.props;
 
             const dialogMarkup = loading ? (
-                <CircularProgress size={200}/>
+                <div className={classes.spinnerDiv}>
+                    <CircularProgress size={200} thickness={2}/>
+                </div>
+                
             ) : (
                 <Grid container spacing={2}>
                     <Grid item sm={5}>
@@ -95,6 +109,14 @@ class TweetDialog extends Component {
                         <Typography variant="body1">
                             {body}
                         </Typography>
+                        {/* Like Button */}
+                        <LikeButton tweetId={tweetId}/>
+                        <span>{likeCount} likes</span>
+                        {/* Comment Button */}
+                        <MyButton tip="comments">
+                            <ChatIcon color="primary"/>
+                        </MyButton>
+                        <span>{commentCount}</span>
                     </Grid>
                 </Grid>
             )
