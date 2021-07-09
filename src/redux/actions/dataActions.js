@@ -1,4 +1,4 @@
-import {SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, DELETE_TWEET, POST_TWEET, CLEAR_ERRORS, LOADING_UI, SET_ERRORS} from '../types';
+import {SET_TWEETS, SET_TWEET, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET, DELETE_TWEET, POST_TWEET, CLEAR_ERRORS, LOADING_UI, SET_ERRORS, STOP_LOADING_UI} from '../types';
 import axios from 'axios';
 
 export const getTweets = () => dispatch => {
@@ -17,6 +17,24 @@ export const getTweets = () => dispatch => {
             });
         });
 };
+
+export const getTweet = tweetId => dispatch => {
+    dispatch({type: LOADING_UI});
+    axios.get(`/tweet/${tweetId}`)
+        .then(res => {
+            console.log(res.data)
+            dispatch({
+                type: SET_TWEET,
+                payload: res.data
+            });
+            dispatch({
+                type: STOP_LOADING_UI
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
 
 export const likeTweet = tweetId => dispatch => {
     axios.get(`/tweet/${tweetId}/like`)
@@ -70,3 +88,8 @@ export const postTweet = newTweet => dispatch => {
             })
         })
 }
+
+export const clearErrors = () => dispatch => {
+    dispatch({type: CLEAR_ERRORS});
+}
+

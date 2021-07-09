@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 //COMPONENTS
 import MyButton from '../util/MyButton';
 import DeleteTweet from '../components/DeleteTweet';
+import TweetDialog from './TweetDialog';
 //MUI
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -108,6 +109,7 @@ class Tweet extends Component {
                       <ChatIcon color="primary"/>
                     </MyButton>
                     <span>{commentCount}</span>
+                    <TweetDialog tweetId={tweetId} userHandle={userHandle}/>
                 </CardContent>
             </Card>
         )

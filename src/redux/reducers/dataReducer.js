@@ -20,6 +20,11 @@ export default function(state=initialState, action){
                 tweets: action.payload,
                 loading: false
             }
+        case SET_TWEET:
+            return {
+                ...state,
+                tweet: action.payload
+            }
         case LIKE_TWEET: 
         case UNLIKE_TWEET:
             index = state.tweets.findIndex((tweet) => tweet.tweetId === action.payload.tweetId);
