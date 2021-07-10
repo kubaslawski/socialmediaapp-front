@@ -56,6 +56,7 @@ class App extends Component {
             component={SignUp} 
             />
             <Route exact path="/users/:handle" component={User}/>
+            <Route exact path="/users/:handle/tweet/:tweetId" component={User}/>
           </Switch> 
           </div>
         </Router>

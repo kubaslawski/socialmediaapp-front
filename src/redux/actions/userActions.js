@@ -4,7 +4,8 @@ import {
     CLEAR_ERRORS, 
     LOADING_UI,
     SET_UNAUTHENTICATED,
-    LOADING_USER
+    LOADING_USER,
+    MARK_NOTIFICATIONS_READ
 } from '../types';
 import axios from 'axios';
 
@@ -95,6 +96,15 @@ export const editUserDetails = userDetails => dispatch => {
         .catch(err => console.log(err));
 }
 
+export const markNotificationsRead = notificationsIds => dispatch => {
+    axios.post('https://europe-west1-socialmediaapp-e541d.cloudfunctions.net/api/notifications', notificationsIds)
+        .then(res => {
+            dispatch({
+                type: MARK_NOTIFICATIONS_READ
+            })
+        })
+        .catch(err => console.log(err));
+}
 // export const deleteTweet = tweetId => dispatch => {
 //     axios.delete(`/tweet/${tweetId}`)
 //         .then(() => {
