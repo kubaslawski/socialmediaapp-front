@@ -4,6 +4,7 @@ import axios from 'axios';
 //COMPONENTS
 import StaticProfile from '../components/profile/StaticProfile'
 import Tweet from '../components/tweet/Tweet';
+import TweetSkeleton from '../util/TweetSkeleton';
 //MUI
 import Grid from '@material-ui/core/Grid';
 //REDUX
@@ -38,7 +39,7 @@ export class User extends Component {
         const {tweetIdParam} = this.state;
 
         const tweetsMarkup = loading ? (
-            <p>Loading Data</p>
+            <TweetSkeleton/>
         ) : tweets === null ? (
             <p>No Tweets yet</p>
         ) : !tweetIdParam ? (

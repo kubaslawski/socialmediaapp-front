@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 //COMPONENTS
 import Tweet from '../components/tweet/Tweet';
 import Profile from '../components/profile/Profile';
+import TweetSkeleton from '../util/TweetSkeleton';
 //REDUX
 import {connect} from 'react-redux';
 import {getTweets} from '../redux/actions/dataActions';
@@ -20,7 +21,7 @@ class Home extends Component {
 
         let recentTweetsMarkup = !loading ? (
             tweets.map((tweet) => <Tweet key={tweet.tweetId} tweet={tweet}/>)
-        ) : <p>Loading...</p>
+        ) : <TweetSkeleton/>
 
         return (
             <Grid container spacing={1}>
